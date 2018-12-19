@@ -4,6 +4,8 @@ import './style.css';
 
 const app = document.querySelector('#content');
 const provider = new WsProvider('wss://substrate-rpc.parity.io/');
+// If you're running a local node, use this line instead of the one above ^^.
+// const provider = new WsProvider('ws://127.0.0.1:9944');
 
 const createElement = (content) => {
   console.log(content);
