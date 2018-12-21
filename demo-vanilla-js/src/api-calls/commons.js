@@ -1,6 +1,6 @@
 // Our address for Alice on the dev chain
-export const Alice = '5GoKvZWG5ZPYL1WUovuHW3zJBWBP5eT8CbqjdRY4Q6iMaDtZ';
-export const Bob = '5Gw3s7q4QLkSWwknsiPtjujPv3XM4Trxi5d4PgKMMk3gfGTE';
+export const ALICE = '5GoKvZWG5ZPYL1WUovuHW3zJBWBP5eT8CbqjdRY4Q6iMaDtZ';
+export const BOB = '5Gw3s7q4QLkSWwknsiPtjujPv3XM4Trxi5d4PgKMMk3gfGTE';
 
 const app = document.querySelector('#content');
 
@@ -14,9 +14,10 @@ export const createWrapper = (wrapperClass, headline) => {
   return div;
 };
 
-export const createElement = (content, element = app) => {
+export const createElement = (content, element = app, className = '') => {
   console.log(content);
   const p = document.createElement('p');
+  p.classList.add(className);
   p.innerHTML = content;
   element.append(p);
 };

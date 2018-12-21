@@ -3,7 +3,7 @@ import { ApiPromise } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 import {
-  Alice, Bob, createElement, createWrapper
+  ALICE, BOB, createElement, createWrapper
 } from './commons';
 
 // https://polkadot.js.org/api/examples/promise/01_simple_connect/
@@ -11,20 +11,12 @@ export const simpleConnect = async (provider) => {
   const wrapper = createWrapper('simple-connect', 'Simple Connect');
   // Retrieve the chain & node information information via rpc calls
   const api = await ApiPromise.create(provider);
-  const [chain, nodeName, nodeVersion, properties] = await Promise.all([
+  const [chain, nodeName, nodeVersion] = await Promise.all([
     api.rpc.system.chain(),
     api.rpc.system.name(),
-    api.rpc.system.version(),
-    api.rpc.system.properties()
+    api.rpc.system.version()
   ]);
   createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
-  if (properties) {
-    console.log('properties', properties);
-    properties.reduce((v) => {
-      console.log('reduce', v);
-    });
-    createElement(properties, wrapper);
-  }
 };
 
 // https://polkadot.js.org/api/examples/promise/02_listen_to_blocks/
@@ -44,12 +36,12 @@ export const listenToBalanceChange = async (provider) => {
   const api = await ApiPromise.create();
   // Retrieve the initial balance. Since the call has no callback, it is simply a promise
   // that resolves to the current on-chain value
-  let previous = await api.query.balances.freeBalance(Alice);
-  createElement(`<b>Alice</b> ${Alice} has a balance of ${previous}`, wrapper);
+  let previous = await api.query.balances.freeBalance(ALICE);
+  createElement(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
   createElement(`You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address`, wrapper);
 
   // Here we subscribe to any balance changes and update the on-screen value
-  api.query.balances.freeBalance(Alice, (current) => {
+  api.query.balances.freeBalance(ALICE, (current) => {
     // Calculate the delta
     const change = current.sub(previous);
     // Only display positive value changes (Since we are pulling `previous` above already,
@@ -69,11 +61,11 @@ export const readChainState = async (provider) => {
   const api = await ApiPromise.create();
   // Make our basic chain state/storage queries, all in one go
   const [accountNonce, blockPeriod, validators] = await Promise.all([
-    api.query.system.accountNonce(Alice),
+    api.query.system.accountNonce(ALICE),
     api.query.timestamp.now(),
     api.query.session.validators()
   ]);
-  createElement(`accountNonce(${Alice}) ${accountNonce}`, wrapper);
+  createElement(`accountNonce(${ALICE}) ${accountNonce}`, wrapper);
   createElement(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
   // Retrieve the balances for all validators
   const validatorBalances = await Promise.all(
@@ -107,7 +99,7 @@ export const makeTransfer = async (provider) => {
   // Create a extrinsic, transferring 12345 units to Bob. We can also create,
   // sign and send in one operation (as per the samples in the Api documentation),
   // here we split it out for the sake of readability
-  const transfer = api.tx.balances.transfer(Bob, 12345);
+  const transfer = api.tx.balances.transfer(BOB, 12345);
   // Sign the transaction using our account
   transfer.sign(alice, aliceNonce);
   // Send the transaction and retrieve the resulting Hash
@@ -119,25 +111,22 @@ export const displaySystemEvents = async (provider) => {
   const wrapper = createWrapper('display-system-events');
   // Create our API with a default connection to the local node
   const api = await ApiPromise.create();
-
   // subscribe to system events via storage
   api.query.system.events((events) => {
-    createElement(`\nReceived ${events.length} events:`, wrapper);
-
+    createElement(`-------- Received ${events.length} events: --------`, wrapper, 'highlight');
     // loop through the Vec<EventRecord>
     events.forEach((record) => {
       // extract the phase, event and the event types
       const { event, phase } = record;
       const types = event.typeDef;
-
       // show what we are busy with
-      createElement(`\t${event.section}:${event.method}:: (phase=${phase.toString()})`, wrapper);
-      createElement(`\t\t${event.meta.documentation.toString()}`, wrapper);
-
+      createElement(`${event.section}:${event.method}:: (phase=${phase.toString()})`, wrapper);
+      createElement(`\t${event.meta.documentation.toString()}`, wrapper);
       // loop through each of the parameters, displaying the type and data
       event.data.forEach((data, index) => {
-        createElement(`\t\t\t${types[index].type}: ${data.toString()}`, wrapper);
+        createElement(`\t\tt${types[index].type}: ${data.toString()}`, wrapper);
       });
     });
+    createElement(`-------- End ${events.length} events: --------------`, wrapper, 'console');
   });
 };
