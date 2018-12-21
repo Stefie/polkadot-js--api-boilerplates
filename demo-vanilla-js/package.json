@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@polkadot/api": "^0.33.25",
-    "@polkadot/keyring": "^0.33.21",
-    "@polkadot/rpc-provider": "^0.33.25",
-    "@polkadot/util": "^0.33.21",
+    "@polkadot/api": "^0.35.5",
+    "@polkadot/keyring": "^0.33.24",
+    "@polkadot/rpc-provider": "^0.35.5",
+    "@polkadot/util": "^0.33.24",
     "rxjs": "^6.3.3"
   },
   "devDependencies": {

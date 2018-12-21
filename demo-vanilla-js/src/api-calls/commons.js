@@ -14,10 +14,12 @@ export const createWrapper = (wrapperClass, headline) => {
   return div;
 };
 
-export const createElement = (content, element = app, className = '') => {
+export const createElement = (content, element = app, className) => {
   console.log(content);
   const p = document.createElement('p');
-  p.classList.add(className);
+  if (className) {
+    p.classList.add(className);
+  }
   p.innerHTML = content;
   element.append(p);
 };

@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.6.2",
-    "@polkadot/api": "^0.33.21",
+    "@polkadot/api": "^0.35.5",
+    "@polkadot/keyring": "^0.33.24",
+    "@polkadot/rpc-provider": "^0.35.5",
+    "@polkadot/util": "^0.33.24",
+    "rxjs": "^6.3.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"

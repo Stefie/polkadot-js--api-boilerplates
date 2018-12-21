@@ -33,7 +33,7 @@ export const listenToBlocks = async (provider) => {
 export const listenToBalanceChange = async (provider) => {
   const wrapper = createWrapper('listen-to-balance-change');
   // Create an await for the API
-  const api = await ApiPromise.create();
+  const api = await ApiPromise.create(provider);
   // Retrieve the initial balance. Since the call has no callback, it is simply a promise
   // that resolves to the current on-chain value
   let previous = await api.query.balances.freeBalance(ALICE);
@@ -58,7 +58,7 @@ export const listenToBalanceChange = async (provider) => {
 export const readChainState = async (provider) => {
   const wrapper = createWrapper('read-chain-state');
   // Create our API with a default connection to the local node
-  const api = await ApiPromise.create();
+  const api = await ApiPromise.create(provider);
   // Make our basic chain state/storage queries, all in one go
   const [accountNonce, blockPeriod, validators] = await Promise.all([
     api.query.system.accountNonce(ALICE),
@@ -93,7 +93,7 @@ export const makeTransfer = async (provider) => {
   // Add Alice to our keyring (with the known seed for the account)
   const alice = keyring.addFromSeed(stringToU8a(ALICE_SEED));
   // Instantiate the API
-  const api = await ApiPromise.create();
+  const api = await ApiPromise.create(provider);
   // Retrieve the nonce for Alice, to be used to sign the transaction
   const aliceNonce = await api.query.system.accountNonce(alice.address());
   // Create a extrinsic, transferring 12345 units to Bob. We can also create,
@@ -110,7 +110,7 @@ export const makeTransfer = async (provider) => {
 export const displaySystemEvents = async (provider) => {
   const wrapper = createWrapper('display-system-events');
   // Create our API with a default connection to the local node
-  const api = await ApiPromise.create();
+  const api = await ApiPromise.create(provider);
   // subscribe to system events via storage
   api.query.system.events((events) => {
     createElement(`-------- Received ${events.length} events: --------`, wrapper, 'highlight');

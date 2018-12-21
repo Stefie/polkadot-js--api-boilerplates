@@ -13,8 +13,8 @@ import {
 // import { simpleConnect, listenToBlocks } from './api-calls/with-api-rx';
 
 // Initialise the provider to connect to the local node
-const provider = new WsProvider('ws://127.0.0.1:9944');
-// const provider = new WsProvider('wss://substrate-rpc.parity.io/');
+// const provider = new WsProvider('ws://127.0.0.1:9944');
+const provider = new WsProvider('wss://substrate-rpc.parity.io/');
 
 (function main () {
   simpleConnect(provider).catch(console.error);
