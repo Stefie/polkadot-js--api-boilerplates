@@ -16,7 +16,7 @@ const createElement = (content) => {
 
 const simpleConnect = async (ws) => {
   // Retrieve the chain & node information information via rpc calls
-  const api = await ApiPromise.create(provider);
+  const api = await ApiPromise.create(ws);
   const [chain, nodeName, nodeVersion] = await Promise.all([
     api.rpc.system.chain(),
     api.rpc.system.name(),
