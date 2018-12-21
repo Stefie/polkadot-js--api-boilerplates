@@ -55,6 +55,14 @@ a:hover {
   color: #cc3387;
 }
 
+.highlight {
+  font-weight: bold;
+}
+
+.console {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
   .content {
     flex-direction: column;
