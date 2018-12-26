@@ -2,6 +2,10 @@
   "name": "demo-vanilla",
   "version": "1.0.0",
   "description": "A very simple demo of how to use the Polkadot{js} API",
+  "engines": {
+    "node": "^10.13.0",
+    "yarn": "^1.10.1"
+  },
   "main": "index.js",
   "repository": "",
   "scripts": {
@@ -16,10 +20,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@polkadot/api": "^0.35.5",
-    "@polkadot/keyring": "^0.33.24",
-    "@polkadot/rpc-provider": "^0.35.5",
-    "@polkadot/util": "^0.33.24",
+    "@polkadot/api": "^0.35.7",
+    "@polkadot/keyring": "^0.33.25",
+    "@polkadot/rpc-provider": "^0.35.7",
+    "@polkadot/util": "^0.33.25",
     "rxjs": "^6.3.3"
   },
   "devDependencies": {

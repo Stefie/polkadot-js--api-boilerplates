@@ -4,7 +4,7 @@ import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 import {
   ALICE, BOB, createElement, createWrapper
-} from './commons';
+} from '../commons';
 
 export const simpleConnect = async (provider) => {
   const wrapper = createWrapper('simple-connect', 'Simple Connect');
