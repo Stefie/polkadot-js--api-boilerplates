@@ -2,22 +2,32 @@
   "name": "demo-create-react-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^10.13.0",
+    "yarn": "^1.10.1"
+  },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
-    "@polkadot/api": "^0.35.5",
-    "@polkadot/keyring": "^0.33.24",
-    "@polkadot/rpc-provider": "^0.35.5",
-    "@polkadot/util": "^0.33.24",
-    "rxjs": "^6.3.3",
+    "@polkadot/api": "^0.35.7",
+    "@polkadot/keyring": "^0.33.25",
+    "@polkadot/rpc-provider": "^0.35.7",
+    "@polkadot/util": "^0.33.25",
+    "eslint-config-react-app": "^3.0.6",
+    "eslint-plugin-html": "^5.0.0",
+    "global": "^4.3.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "rxjs": "^6.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

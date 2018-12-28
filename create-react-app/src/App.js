@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './assets/logo.svg';
 import './styles/App.css';
 
-import SimpleConnect from './components/SimpleConnect';
+// import SimpleConnect from './components/SimpleConnect';
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo"/>
         </header>
         <main>
-          <SimpleConnect/>
+          <div>Hi!</div>
         </main>
       </div>);
   }
