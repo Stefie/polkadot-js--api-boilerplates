@@ -3,7 +3,7 @@ import { ApiRx } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 import {
-  ALICE, BOB, createElement, createWrapper
+  ALICE, BOB, createElement, createWrapper,
 } from '../commons';
 
 export const simpleConnect = async (provider) => {
@@ -13,7 +13,7 @@ export const simpleConnect = async (provider) => {
   const [chain, nodeName, nodeVersion] = await Promise.all([
     api.rpc.system.chain(),
     api.rpc.system.name(),
-    api.rpc.system.version()
+    api.rpc.system.version(),
   ]);
   createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
 };

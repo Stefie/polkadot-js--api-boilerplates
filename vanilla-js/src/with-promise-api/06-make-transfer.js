@@ -3,7 +3,7 @@ import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 
 import {
-  BOB, createElement, createWrapper
+  BOB, createElement, createWrapper,
 } from '../commons';
 
 export default async (provider) => {

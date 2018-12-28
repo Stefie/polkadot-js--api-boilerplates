@@ -13,5 +13,5 @@ export {
   readChainState,
   listenToBalanceChange,
   makeTransfer,
-  displaySystemEvents
+  displaySystemEvents,
 };

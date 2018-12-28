@@ -1,7 +1,6 @@
 import { WsProvider } from '@polkadot/rpc-provider';
 import './style.css';
-// import { fromEvent } from 'rxjs';
-// import { throttleTime, map, scan } from 'rxjs/operators';
+
 import {
   simpleConnect,
   listenToBlocks,

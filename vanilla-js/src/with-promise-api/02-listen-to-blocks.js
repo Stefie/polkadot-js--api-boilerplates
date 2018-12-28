@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  createElement, createWrapper
+  createElement, createWrapper,
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/02_listen_to_blocks/

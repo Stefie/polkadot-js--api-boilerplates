@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  ALICE, BOB, createElement, createWrapper
+  ALICE, BOB, createElement, createWrapper,
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/05/
@@ -14,7 +14,7 @@ export default async (provider) => {
   console.log(`Address 1\t ${pair1.address()}\t Seed: ${u8aToHex(SEED1)}`);
   // A fixed seed from an array
   const SEED2 = new Uint8Array([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 0, 0
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 0, 0,
   ]);
   const pair2 = new Keyring().addFromSeed(SEED2);
   console.log(`Address 2\t ${pair2.address()}\t Seed: ${u8aToHex(SEED2)}`);

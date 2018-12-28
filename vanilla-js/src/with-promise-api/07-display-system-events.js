@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  createElement, createWrapper
+  createElement, createWrapper,
 } from '../commons';
 
 export default async (provider) => {
