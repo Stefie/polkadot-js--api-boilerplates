@@ -15,11 +15,23 @@ export const createWrapper = (wrapperClass, headline) => {
 };
 
 export const createElement = (content, element = app, className) => {
-  console.log(content);
+  console.log(content.replace('<br />', '\n'));
+
   const p = document.createElement('p');
   if (className) {
     p.classList.add(className);
   }
   p.innerHTML = content;
+  element.append(p);
+};
+
+export const createError = (error, element = app) => {
+  const textNode = error === undefined ? 'Error establishing API connection' : `Error of type ${error.name}:<br />${error.message}`;
+
+  console.log(textNode.replace('<br />', '\n'));
+
+  const p = document.createElement('p');
+  p.classList.add('error');
+  p.innerHTML = textNode;
   element.append(p);
 };
