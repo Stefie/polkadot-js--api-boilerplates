@@ -1,4 +1,3 @@
-export { default as connectToApi } from './00-connect-to-api';
 export { default as simpleConnect } from './01-simple-connect';
 export { default as listenToBlocks } from './02-listen-to-blocks';
 export { default as listenToBalanceChange } from './03-listen-to-balance-change';
