@@ -1,4 +1,4 @@
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 import { ApiRx } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
@@ -16,9 +16,10 @@ export default async (provider) => {
   const alice = keyring.addFromSeed(stringToU8a(ALICE_SEED));
   //  Instantiate the API
   const api = await ApiRx.create(provider).toPromise();
+
   // @TODO Rewrite Example. This one transfers the given amount on every new block
   // retrieve nonce for the account
-  api.query.system.accountNonce(alice.address()).pipe(
+  api.query.system.accountNonce(alice.address()).pipe(first(),
     // pipe nonce into transfer
     switchMap(nonce => api.tx.balances
     // create transfer
@@ -26,10 +27,13 @@ export default async (provider) => {
     // sign the transcation
       .sign(alice, nonce || 0) // Bug in ApiRx, returns null before first transaction on new chain
     // send the transaction
-      .send()),
-  )
+      .send()))
     // subscribe to overall result
     .subscribe((hash) => {
-      createElement(`Transfer 12345 from <b>Alice</b> to <b>Bob</b> with hash ${hash}`, wrapper);
+      if (hash.status.raw.length === 32) {
+        createElement(`Successful transfer of 12345 from <b>Alice</b> to <b>Bob</b> with hash ${hash.status.raw.toString()}`, wrapper);
+      } else {
+        createElement('Preparing transfer of 12345 from <b>Alice</b> to <b>Bob</b>', wrapper);
+      }
     });
 };
