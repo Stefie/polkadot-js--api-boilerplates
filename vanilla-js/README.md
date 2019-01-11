@@ -8,10 +8,13 @@ It's only using Webpack 4 for Hot Module Reloading and to be able to include the
 
 ## Available Scripts
 
+### `yarn install`
+Installs all dependencies listed in the package.json.
+
 ### `yarn start`
 Starts a Webpack development environment with Hot Module Reloading (HMR).
 Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
-The page will reload if you make edits.<br>
+The page will reload if you make edits.
 
 ### `yarn run build`
 Builds a standalone
