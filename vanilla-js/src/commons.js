@@ -26,10 +26,8 @@ export const createElement = (content, element = app, className) => {
 };
 
 export const createError = (error, element = app) => {
-  const textNode = error === undefined ? 'Error establishing API connection' : `Error of type ${error.name}:<br />${error.message}`;
-
-  console.log(textNode.replace('<br />', '\n'));
-
+  const textNode = error.type === undefined ? 'Undefined error while tying to fulfill request' : `Error of type ${error.name}:<br />${error.message}`;
+  console.error(textNode.replace('<br />', '\n'));
   const p = document.createElement('p');
   p.classList.add('error');
   p.innerHTML = textNode;
