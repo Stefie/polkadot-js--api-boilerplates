@@ -16,6 +16,18 @@ body{
   width: 100vw;
 }
 
+@keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+.fadeIn {
+  opacity: 1;
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 200ms;
+}
+
 .content {
   align-items: stretch;
   align-content: stretch;
@@ -79,6 +91,7 @@ a:hover {
   }
   .wrapper {
     width: 100vw;
-    max-height: 80vh;
+    height: auto;
+    max-height: 40vh;
   }
 }

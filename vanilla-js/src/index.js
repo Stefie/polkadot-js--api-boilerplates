@@ -2,31 +2,39 @@ import { WsProvider } from '@polkadot/rpc-provider';
 import './style.css';
 
 import {
-  // simpleConnect,
+  simpleConnect,
   listenToBlocks,
-  // listenToBalanceChange,
   readChainState,
-  // makeTransfer,
-  displaySystemEvents,
+  makeTransfer,
+  listenToBalanceChange,
+  displaySystemEvents
 } from './with-promise-api';
 import {
-  simpleConnect, // @TODO debug subscriptionId
-  // listenToBlocks,
-  listenToBalanceChange,
-  // readChainState, // @TODO debug 'nonce === null vs. 0' in ApiRx or rpc-rx
-  makeTransfer, // @TODO go through examples in docs
-  // displaySystemEvents,
+// simpleConnect,
+// listenToBlocks,
+// readChainState,
+// makeTransfer,
+// listenToBalanceChange,
+// displaySystemEvents
 } from './with-rx-api';
 
-// Initialise the provider to connect to the local node
+// Choose which provider you want to connect to:
+
+/**
+** Local Node (Substrate, 127.0.0.1:9944)
+**/
 const provider = new WsProvider('ws://127.0.0.1:9944');
+
+/**
+** Node Charred Cherry (Substrate, hosted by Parity Technologies)
+**/
 // const provider = new WsProvider('wss://substrate-rpc.parity.io/');
 
-(function main() {
+(function main () {
   simpleConnect(provider);
   listenToBlocks(provider);
-  listenToBalanceChange(provider);
   readChainState(provider);
   makeTransfer(provider);
+  listenToBalanceChange(provider);
   displaySystemEvents(provider);
 }());
