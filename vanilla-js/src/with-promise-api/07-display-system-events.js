@@ -25,7 +25,7 @@ export default async (provider) => {
           createElement(`\t\tt${types[index].type}: ${data.toString()}`, wrapper);
         });
       });
-      createElement(`----- End ${events.length} events: -----------`, wrapper, 'console');
+      createElement(`----- End ${events.length} event(s): -----------`, wrapper, 'console');
     });
   } catch (e) {
     createError(e, wrapper);

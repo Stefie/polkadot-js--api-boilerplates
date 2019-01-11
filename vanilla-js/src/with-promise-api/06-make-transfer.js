@@ -20,7 +20,6 @@ export default async (provider) => {
     // const api = await ApiPromise.create(provider);
     // Retrieve the nonce for Alice, to be used to sign the transaction
     const aliceNonce = await api.query.system.accountNonce(alice.address());
-    console.log('aliceNonce', aliceNonce.toString());
     // Create a extrinsic, transferring 12345 units to Bob. We can also create,
     // sign and send in one operation (as per the samples in the Api documentation),
     // here we split it out for the sake of readability
