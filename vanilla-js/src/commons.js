@@ -18,11 +18,21 @@ export const createElement = (content, element = app, className) => {
   console.log(content.replace('<br />', '\n'));
 
   const p = document.createElement('p');
-  if (className) {
-    p.classList.add(className);
-  }
+  p.classList.add(className, 'fadeIn');
   p.innerHTML = content;
   element.append(p);
+};
+
+export const createButton = (cb, element = app, text = 'Click me') => {
+  const button = document.createElement('button');
+  const callback = () => {
+    console.log(`Button "${text}" clicked!`);
+    cb();
+  };
+
+  button.innerHTML = text;
+  element.appendChild(button);
+  button.addEventListener('click', callback);
 };
 
 export const createError = (error, element = app) => {
