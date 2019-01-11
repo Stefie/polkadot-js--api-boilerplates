@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  ALICE, createElement, createError, createWrapper,
+  ALICE, createElement, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/05_read_storage/
@@ -13,17 +13,17 @@ export default async (provider) => {
     const [accountNonce, blockPeriod, validators] = await Promise.all([
       api.query.system.accountNonce(ALICE),
       api.query.timestamp.now(),
-      api.query.session.validators(),
+      api.query.session.validators()
     ]);
 
-    createElement(`Account: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
+    createElement(`Account Alice: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
     createElement(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
 
     if (validators && validators.length > 0) {
       // Retrieve the balances for all validators
       createElement('Validators', wrapper, 'highlight');
       const validatorBalances = await Promise.all(
-        validators.map(authorityId => api.query.balances.freeBalance(authorityId)),
+        validators.map(authorityId => api.query.balances.freeBalance(authorityId))
       );
       validators.forEach((authorityId, index) => {
         createElement(`Validator: ${authorityId.toString()} <br />Balance: ${validatorBalances[index].toString()}`, wrapper);

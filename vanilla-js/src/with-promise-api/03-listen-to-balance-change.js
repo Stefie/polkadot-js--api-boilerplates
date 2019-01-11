@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  ALICE, createElement, createError, createWrapper,
+  ALICE, createElement, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/03_listen_to_balance_change/
@@ -27,7 +27,7 @@ export default async (provider) => {
         return;
       }
       previous = balance;
-      createElement(`Transaction: ${change}`, wrapper);
+      createElement(`New transaction: ${change}`, wrapper);
     });
   } catch (e) {
     createError(e, wrapper);

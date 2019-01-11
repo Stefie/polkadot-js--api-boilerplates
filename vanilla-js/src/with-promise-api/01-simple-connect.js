@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  createElement, createError, createWrapper,
+  createElement, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/01_simple_connect/
@@ -14,7 +14,7 @@ export default async (provider) => {
       api.rpc.system.chain(),
       api.rpc.system.name(),
       api.rpc.system.version(),
-      api.rpc.system.properties(),
+      api.rpc.system.properties()
     ]);
 
     createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
