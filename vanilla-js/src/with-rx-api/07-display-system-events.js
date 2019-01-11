@@ -1,6 +1,6 @@
 import { ApiRx } from '@polkadot/api';
 import {
-  createElement, createWrapper,
+  createElement, createWrapper
 } from '../commons';
 
 export default (provider) => {
@@ -23,7 +23,7 @@ export default (provider) => {
           createElement(`\t\tt${types[index].type}: ${data.toString()}`, wrapper);
         });
       });
-      createElement(`----- End ${events.length} events: -----------`, wrapper, 'console');
+      createElement(`----- End ${events.length} event(s): -----------`, wrapper, 'console');
     });
   });
 };

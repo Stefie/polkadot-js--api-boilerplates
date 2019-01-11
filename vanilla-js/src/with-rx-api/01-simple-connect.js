@@ -1,9 +1,9 @@
 import { ApiRx } from '@polkadot/api';
 import {
-  createElement, createWrapper,
+  createElement, createWrapper
 } from '../commons';
 
-export default (provider) => {
+export default async (provider) => {
   const wrapper = createWrapper('01-simple-connect', 'Rx - Simple Connect');
   // Create our API with a connection to the node
   ApiRx.create(provider).subscribe(async (api) => {
@@ -12,7 +12,7 @@ export default (provider) => {
       api.rpc.system.chain().toPromise(),
       api.rpc.system.name().toPromise(),
       api.rpc.system.version().toPromise(),
-      api.rpc.system.properties().toPromise(),
+      api.rpc.system.properties().toPromise()
     ]);
 
     createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
@@ -24,7 +24,7 @@ export default (provider) => {
         createElement(`&bull; ${key}: ${value}`, wrapper);
       });
     } else {
-      createElement('No specific chain properties found.', wrapper, 'highlight');
+      createElement('No node specific properties found.', wrapper, 'highlight');
     }
   });
 };

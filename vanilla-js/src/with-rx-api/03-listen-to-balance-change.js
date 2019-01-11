@@ -1,7 +1,7 @@
 import { ApiRx } from '@polkadot/api';
 import { first } from 'rxjs/operators';
 import {
-  ALICE, createElement, createWrapper,
+  ALICE, createElement, createWrapper
 } from '../commons';
 
 export default (provider) => {
