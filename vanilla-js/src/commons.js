@@ -5,8 +5,8 @@ export const BOB = '5Gw3s7q4QLkSWwknsiPtjujPv3XM4Trxi5d4PgKMMk3gfGTE';
 const app = document.querySelector('#content');
 
 export const createWrapper = (wrapperClass, headline) => {
-  const div = document.createLog('div');
-  const head = document.createLog('h2');
+  const div = document.createElement('div');
+  const head = document.createElement('h2');
   head.textContent = headline || wrapperClass;
   div.classList.add('wrapper', wrapperClass);
   div.append(head);
@@ -17,14 +17,14 @@ export const createWrapper = (wrapperClass, headline) => {
 export const createLog = (content, element = app, className) => {
   console.log(content.replace('<br />', '\n'));
 
-  const p = document.createLog('p');
+  const p = document.createElement('p');
   p.classList.add(className, 'fadeIn');
   p.innerHTML = content;
   element.append(p);
 };
 
 export const createButton = (cb, element = app, text = 'Click me') => {
-  const button = document.createLog('button');
+  const button = document.createElement('button');
   const callback = () => {
     console.log(`Button "${text}" clicked!`);
     cb();
@@ -38,7 +38,7 @@ export const createButton = (cb, element = app, text = 'Click me') => {
 export const createError = (error, element = app) => {
   const textNode = error.type === undefined ? 'Undefined error while tying to fulfill request' : `Error of type ${error.name}:<br />${error.message}`;
   console.error(textNode.replace('<br />', '\n'));
-  const p = document.createLog('p');
+  const p = document.createElement('p');
   p.classList.add('error');
   p.innerHTML = textNode;
   element.append(p);
