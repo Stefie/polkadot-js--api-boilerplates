@@ -1,5 +1,4 @@
 import { WsProvider } from '@polkadot/rpc-provider';
-import './style.css';
 
 import {
   simpleConnect,
