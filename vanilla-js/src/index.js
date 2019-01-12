@@ -19,7 +19,6 @@ import {
 } from './with-rx-api';
 
 // Choose which provider you want to connect to:
-
 /**
 ** Local Node (Substrate, 127.0.0.1:9944)
 **/

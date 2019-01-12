@@ -3,7 +3,7 @@ import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 
 import {
-  BOB, createButton, createElement, createError, createWrapper
+  BOB, createButton, createLog, createError, createWrapper
 } from '../commons';
 
 export default (provider) => {
@@ -31,7 +31,7 @@ export default (provider) => {
       transfer.sign(alice, aliceNonce);
       // Send the transaction and retrieve the resulting Hash
       const hash = await transfer.send();
-      createElement(`Transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${hash}`, wrapper);
+      createLog(`Transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${hash}`, wrapper);
     } catch (e) {
       createError(e, wrapper);
     }

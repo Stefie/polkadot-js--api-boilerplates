@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  createElement, createError, createWrapper
+  createLog, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/01_simple_connect/
@@ -17,16 +17,16 @@ export default async (provider) => {
       api.rpc.system.properties()
     ]);
 
-    createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
-    createElement(`WebSocket URL is ${provider.endpoint}`, wrapper);
+    createLog(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
+    createLog(`WebSocket URL is ${provider.endpoint}`, wrapper);
 
     if (properties.size > 0) {
-      createElement('Node specific properties: ', wrapper, 'highlight');
+      createLog('Node specific properties: ', wrapper, 'highlight');
       properties.forEach((value, key) => {
-        createElement(`&bull; ${key}: ${value}`, wrapper);
+        createLog(`&bull; ${key}: ${value}`, wrapper);
       });
     } else {
-      createElement('No specific chain properties found.', wrapper, 'highlight');
+      createLog('No specific chain properties found.', wrapper, 'highlight');
     }
   } catch (e) {
     createError(e, wrapper);

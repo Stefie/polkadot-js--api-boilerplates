@@ -1,7 +1,7 @@
 import { ApiRx } from '@polkadot/api';
 import { first } from 'rxjs/operators';
 import {
-  ALICE, createElement, createWrapper
+  ALICE, createLog, createWrapper
 } from '../commons';
 
 export default (provider) => {
@@ -12,8 +12,8 @@ export default (provider) => {
     // method on the observable together with the first() operator.
     let previous = await api.query.balances.freeBalance(ALICE).pipe(first()).toPromise();
 
-    createElement(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
-    createElement('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
+    createLog(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
+    createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
 
     // Here we subscribe to any balance changes and update the on-screen value
     api.query.balances.freeBalance(ALICE).subscribe((balance) => {
@@ -25,7 +25,7 @@ export default (provider) => {
         return;
       }
       previous = balance;
-      createElement(`Transaction: ${change}`, wrapper);
+      createLog(`Transaction: ${change}`, wrapper);
     });
   });
 };

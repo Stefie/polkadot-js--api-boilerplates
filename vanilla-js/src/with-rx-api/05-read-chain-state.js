@@ -1,7 +1,7 @@
 import { first } from 'rxjs/operators';
 import { ApiRx } from '@polkadot/api';
 import {
-  ALICE, createElement, createWrapper
+  ALICE, createLog, createWrapper
 } from '../commons';
 
 export default (provider) => {
@@ -15,11 +15,11 @@ export default (provider) => {
       api.query.session.validators().pipe(first()).toPromise()
     ]);
 
-    createElement(`Account Alice: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
-    createElement(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
+    createLog(`Account Alice: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
+    createLog(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
 
     if (validators && validators.length > 0) {
-      createElement('Validators', wrapper, 'highlight');
+      createLog('Validators', wrapper, 'highlight');
       // Retrieve the balances for all validators
       const validatorBalances = await Promise.all(
         validators.map(authorityId => api.query.balances.freeBalance(authorityId)
@@ -27,7 +27,7 @@ export default (provider) => {
           .toPromise())
       );
       validators.forEach((authorityId, index) => {
-        createElement(`Validator: ${authorityId.toString()} <br />Balance: ${validatorBalances[index].toString()}`, wrapper);
+        createLog(`Validator: ${authorityId.toString()} <br />Balance: ${validatorBalances[index].toString()}`, wrapper);
       });
     }
   });

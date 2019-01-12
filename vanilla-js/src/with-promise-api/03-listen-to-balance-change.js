@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import {
-  ALICE, createElement, createError, createWrapper
+  ALICE, createLog, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/03_listen_to_balance_change/
@@ -14,8 +14,8 @@ export default async (provider) => {
     // that resolves to the current on-chain value
     let previous = await api.query.balances.freeBalance(ALICE);
 
-    createElement(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
-    createElement('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
+    createLog(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
+    createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
 
     // Here we subscribe to any balance changes and update the on-screen value
     api.query.balances.freeBalance(ALICE, (balance) => {
@@ -27,7 +27,7 @@ export default async (provider) => {
         return;
       }
       previous = balance;
-      createElement(`New transaction: ${change}`, wrapper);
+      createLog(`New transaction: ${change}`, wrapper);
     });
   } catch (e) {
     createError(e, wrapper);

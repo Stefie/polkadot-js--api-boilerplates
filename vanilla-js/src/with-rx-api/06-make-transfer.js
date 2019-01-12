@@ -4,7 +4,7 @@ import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 
 import {
-  BOB, createButton, createElement, createWrapper
+  BOB, createButton, createLog, createWrapper
 } from '../commons';
 
 export default (provider) => {
@@ -33,9 +33,9 @@ export default (provider) => {
     // subscribe to overall result
       .subscribe((hash) => {
         if (hash.status.raw.length === 32) {
-          createElement(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${hash.status.raw}`, wrapper);
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${hash.status.raw}`, wrapper);
         } else {
-          createElement(`Pending transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b>`, wrapper);
+          createLog(`Pending transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b>`, wrapper);
         }
       });
   };

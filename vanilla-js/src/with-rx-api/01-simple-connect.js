@@ -1,6 +1,6 @@
 import { ApiRx } from '@polkadot/api';
 import {
-  createElement, createWrapper
+  createLog, createWrapper
 } from '../commons';
 
 export default async (provider) => {
@@ -15,16 +15,16 @@ export default async (provider) => {
       api.rpc.system.properties().toPromise()
     ]);
 
-    createElement(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
-    createElement(`WebSocket URL is ${provider.endpoint}`, wrapper);
+    createLog(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`, wrapper);
+    createLog(`WebSocket URL is ${provider.endpoint}`, wrapper);
 
     if (properties.size > 0) {
-      createElement('Node specific properties: ', wrapper, 'highlight');
+      createLog('Node specific properties: ', wrapper, 'highlight');
       properties.forEach((value, key) => {
-        createElement(`&bull; ${key}: ${value}`, wrapper);
+        createLog(`&bull; ${key}: ${value}`, wrapper);
       });
     } else {
-      createElement('No node specific properties found.', wrapper, 'highlight');
+      createLog('No node specific properties found.', wrapper, 'highlight');
     }
   });
 };
