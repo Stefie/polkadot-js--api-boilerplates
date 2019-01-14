@@ -10,6 +10,7 @@ import {
 export default (provider) => {
   const wrapper = createWrapper('06-make-transfer', 'Rx - Make Transfer');
   const makeTransfer = async provider => {
+    // Get Alice seed
     const ALICE_SEED = 'Alice'.padEnd(32, ' ');
     // Create an instance of the keyring
     const keyring = new Keyring();
@@ -26,14 +27,11 @@ export default (provider) => {
       switchMap(nonce => api.tx.balances
         // create transfer
         .transfer(BOB, randomAmount)
-        // sign the transcation
-        .sign(alice, nonce)
-        // send the transaction
-        .send()))
-    // subscribe to overall result
-      .subscribe((hash) => {
-        if (hash.status.raw.length === 32) {
-          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${hash.status.raw}`, wrapper);
+        // Sign and send the transcation
+        .signAndSend(alice)))
+      .subscribe(({ status, type }) => {
+        if (type === 'Finalised') {
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.value.toHex()}`, wrapper);
         } else {
           createLog(`Pending transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b>`, wrapper);
         }
