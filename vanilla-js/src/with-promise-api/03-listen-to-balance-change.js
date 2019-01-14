@@ -5,7 +5,7 @@ import {
 
 // https://polkadot.js.org/api/examples/promise/03_listen_to_balance_change/
 export default async (provider) => {
-  const wrapper = createWrapper('03-listen-to-balance-change', 'Promise - Listen to Balance Change');
+  const wrapper = createWrapper('03-listen-to-balance-change', 'Promise - Listen to Alice Balance Change');
 
   try {
     // Create our API with a connection to the node
