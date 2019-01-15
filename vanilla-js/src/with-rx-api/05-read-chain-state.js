@@ -5,7 +5,7 @@ import {
 } from '../commons';
 
 export default (provider) => {
-  const wrapper = createWrapper('05-read-chain-state', 'Rx - Read Chain State');
+  const wrapper = createWrapper('read-chain-state', 'Rx - Read Chain State');
 
   ApiRx.create(provider).subscribe(async (api) => {
     // Use toPromise() with async/await to emit the last Observable value as a Promise

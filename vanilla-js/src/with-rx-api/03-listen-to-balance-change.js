@@ -5,7 +5,7 @@ import {
 } from '../commons';
 
 export default (provider) => {
-  const wrapper = createWrapper('03-listen-to-balance-change', 'Rx - Listen to Alice Balance Change');
+  const wrapper = createWrapper('listen-to-balance-change', 'Rx - Listen to Alice Balance Change');
 
   ApiRx.create(provider).subscribe(async (api) => {
     // Retrieve the initial balance. Since the call has no callback, we can use the toPromise()

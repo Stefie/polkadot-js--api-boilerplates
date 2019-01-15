@@ -4,7 +4,7 @@ import {
 } from '../commons';
 
 export default async (provider) => {
-  const wrapper = createWrapper('01-simple-connect', 'Rx - Simple Connect');
+  const wrapper = createWrapper('simple-connect', 'Rx - Simple Connect');
   // Create our API with a connection to the node
   ApiRx.create(provider).subscribe(async (api) => {
     // Use toPromise() with async/await to emit the last Observable value as a Promise

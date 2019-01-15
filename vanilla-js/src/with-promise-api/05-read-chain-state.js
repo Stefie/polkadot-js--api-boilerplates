@@ -5,7 +5,7 @@ import {
 
 // https://polkadot.js.org/api/examples/promise/05_read_storage/
 export default async (provider) => {
-  const wrapper = createWrapper('05-read-chain-state', 'Promise - Read Chain State');
+  const wrapper = createWrapper('read-chain-state', 'Promise - Read Chain State');
   try {
     // Create our API with a connection to the node
     const api = await ApiPromise.create(provider);

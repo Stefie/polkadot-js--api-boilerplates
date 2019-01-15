@@ -8,7 +8,7 @@ import {
 } from '../commons';
 
 export default (provider) => {
-  const wrapper = createWrapper('06-make-transfer', 'Rx - Make Transfer');
+  const wrapper = createWrapper('make-transfer', 'Rx - Make Transfer');
   const makeTransfer = async provider => {
     // Get Alice seed
     const ALICE_SEED = 'Alice'.padEnd(32, ' ');

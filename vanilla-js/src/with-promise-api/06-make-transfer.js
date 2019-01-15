@@ -7,7 +7,7 @@ import {
 } from '../commons';
 
 export default (provider) => {
-  const wrapper = createWrapper('06-make-transfer', 'Promise - Make Transfer');
+  const wrapper = createWrapper('make-transfer', 'Promise - Make Transfer');
   const makeTransfer = async (provider) => {
     try {
       // Create our API with a connection to the node

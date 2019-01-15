@@ -5,7 +5,7 @@ import {
 
 // https://polkadot.js.org/api/examples/promise/01_simple_connect/
 export default async (provider) => {
-  const wrapper = createWrapper('01-simple-connect', 'Promise - Simple Connect');
+  const wrapper = createWrapper('simple-connect', 'Promise - Simple Connect');
   // Retrieve the chain & node information information via rpc calls
   try {
     // Create our API with a connection to the node

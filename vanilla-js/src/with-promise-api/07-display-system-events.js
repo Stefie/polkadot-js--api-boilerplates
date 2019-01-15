@@ -4,7 +4,7 @@ import {
 } from '../commons';
 
 export default async (provider) => {
-  const wrapper = createWrapper('07-display-system-events', 'Promise - Display System Events');
+  const wrapper = createWrapper('display-system-events', 'Promise - Display System Events');
   // Create our API with a default connection to the local node
   try {
     // Create an await for the API

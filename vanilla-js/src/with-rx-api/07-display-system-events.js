@@ -4,7 +4,7 @@ import {
 } from '../commons';
 
 export default (provider) => {
-  const wrapper = createWrapper('07-display-system-events', 'Rx - Display System Events');
+  const wrapper = createWrapper('display-system-events', 'Rx - Display System Events');
   // Instanciate API
   ApiRx.create(provider).subscribe((api) => {
   // subscribe to system events via storage
