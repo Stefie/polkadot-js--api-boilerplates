@@ -2,7 +2,7 @@ import { ApiRx } from '@polkadot/api';
 import { switchMap, first } from 'rxjs/operators';
 
 import {
-  ALICE, createLog, createError, createWrapper
+  ALICE, createButton, createLog, createWrapper
 } from '../commons';
 // import the test keyring (already has dev keys for Alice, Bob, Charlie, Eve & Ferdie)
 import testKeyring from '@polkadot/keyring/testing';
@@ -14,8 +14,8 @@ const randomAmount = Math.floor((Math.random() * 100000) + 1);
 
 // https://polkadot.js.org/api/examples/promise/08-transfer-events/
 export default async (provider) => {
-  const wrapper = createWrapper('08-transfer-events', 'Rx - Transfer Events');
-  try {
+  const wrapper = createWrapper('transfer-events', 'Rx - Transfer Events');
+  const makeTransfer = async provider => {
     // // Create our API with a connection to the node
     const api = await ApiRx.create(provider).toPromise();
 
@@ -41,18 +41,17 @@ export default async (provider) => {
         // Log transfer events
         createLog(`Transaction status: ${type}`, wrapper);
         if (type === 'Ready') {
-          createLog(`RXSending ${randomAmount} from ${alicePair.address()} to ${recipient}`, wrapper);
+          createLog(`Sending ${randomAmount} from ${alicePair.address()} to ${recipient}`, wrapper);
         }
         if (type === 'Finalised') {
           createLog(`Completed at block hash: ${status.value.toHex()}`, wrapper);
-          createLog(`Events:`, wrapper);
-
+          createLog(`Events:`, wrapper, 'highlight');
           events.forEach(({ phase, event: { data, method, section } }) => {
             createLog(`${phase.toString()}: ${section}.${method} ${data.toString()}`, wrapper);
           });
+          createLog('------------------------', wrapper, 'highlight');
         }
       });
-  } catch (e) {
-    createError(e, wrapper);
-  }
+  };
+  createButton(makeTransfer, wrapper, 'Initialize transfer');
 };
