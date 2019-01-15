@@ -1,10 +1,8 @@
-## Work in progress
-
-## about
-This project includes a number of examples on how to use the [Substrate API](https://github.com/polkadot-js/api).
+## About
+This project includes a number of examples on how to use the [Polkadot{js} API](https://github.com/polkadot-js/api). You can find the examples in the [polkadot.js Docs](https://polkadot.js.org/api/examples/promise/).
 This example is a stripped down ES6 version.
 
-It's only using Webpack 4 for Hot Module Reloading and to be able to include the neceary npm modules [Polkadot{js} API](https://www.npmjs.com/package/@polkadot/api) amd [Polkadot{js} RPC Provider](https://www.npmjs.com/package/@polkadot/rpc-provider).  
+This repository is only using Webpack 4 for Hot Module Reloading and to be able to include the necessary npm modules.
 
 ## Available Scripts
 
@@ -14,7 +12,7 @@ Installs all dependencies listed in the package.json.
 ### `yarn start`
 Starts a Webpack development environment with Hot Module Reloading (HMR).
 Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
-The page will reload if you make edits.
+The page will reload if you make edits to any of the files.
 
 ### `yarn run build`
-Builds a standalone
+Builds a standalone version.
