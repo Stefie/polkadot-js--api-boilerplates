@@ -16,9 +16,9 @@ export const createWrapper = (wrapperClass, headline) => {
 
 export const createLog = (content, element = app, className) => {
   console.log(content.replace('<br />', '\n'));
-
   const p = document.createElement('p');
-  p.classList.add(className, 'fadeIn');
+  p.classList.add('fadeIn');
+  if (className) p.classList.add(className);
   p.innerHTML = content;
   element.append(p);
 };

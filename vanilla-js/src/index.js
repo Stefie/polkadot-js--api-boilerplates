@@ -2,19 +2,21 @@ import { WsProvider } from '@polkadot/rpc-provider';
 
 import {
   simpleConnect,
-  listenToBlocks,
+  // listenToBlocks,
   readChainState,
-  makeTransfer,
-  listenToBalanceChange,
-  displaySystemEvents
+  // makeTransfer,
+  listenToBalanceChange
+  // displaySystemEvents
+  // transferEvents
 } from './with-promise-api';
 import {
-// simpleConnect,
-// listenToBlocks,
-// readChainState,
-// makeTransfer,
-// listenToBalanceChange,
-// displaySystemEvents
+  // simpleConnect,
+  listenToBlocks,
+  // readChainState,
+  makeTransfer,
+  // listenToBalanceChange,
+  // displaySystemEvents,
+  transferEvents
 } from './with-rx-api';
 
 // Choose which provider you want to connect to:
@@ -34,5 +36,6 @@ const provider = new WsProvider('ws://127.0.0.1:9944');
   readChainState(provider);
   makeTransfer(provider);
   listenToBalanceChange(provider);
-  displaySystemEvents(provider);
+  // displaySystemEvents(provider);
+  transferEvents(provider);
 }());
