@@ -3,7 +3,7 @@ import { WsProvider } from '@polkadot/rpc-provider';
 import {
   simpleConnect,
   // listenToBlocks,
-  readChainState,
+  readStorage,
   // makeTransfer,
   listenToBalanceChange
   // displaySystemEvents
@@ -12,7 +12,7 @@ import {
 import {
   // simpleConnect,
   listenToBlocks,
-  // readChainState,
+  // readStorage,
   makeTransfer,
   // listenToBalanceChange,
   // displaySystemEvents,
@@ -30,12 +30,12 @@ const provider = new WsProvider('ws://127.0.0.1:9944');
 **/
 // const provider = new WsProvider('wss://substrate-rpc.parity.io/');
 
-(function main () {
-  simpleConnect(provider);
-  listenToBlocks(provider);
-  readChainState(provider);
-  makeTransfer(provider);
-  listenToBalanceChange(provider);
-  // displaySystemEvents(provider);
-  transferEvents(provider);
-}());
+// (function main () {
+//   // simpleConnect(provider);
+//   // listenToBlocks(provider);
+//   readStorage(provider);
+//   // makeTransfer(provider);
+//   // listenToBalanceChange(provider);
+//   // // displaySystemEvents(provider);
+//   // transferEvents(provider);
+// }());
