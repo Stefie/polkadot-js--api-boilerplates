@@ -33,7 +33,6 @@ export default (provider) => {
         .send(({ events = [], status, type }) => {
           // Log transfer events
           createLog(`Transaction status: ${type}`, wrapper);
-          console.log('events', events);
           if (type === 'Finalised') {
             createLog(`Completed at block hash: ${status.value.toHex()}`, wrapper);
             createLog(`Events:`, wrapper, 'highlight');
