@@ -3,6 +3,7 @@ import {
   createLog, createError, createWrapper
 } from '../commons';
 
+// https://polkadot.js.org/api/examples/promise/08_system_events/
 export default async (provider) => {
   const wrapper = createWrapper('display-system-events', 'Promise - Display System Events');
   // Create our API with a default connection to the local node

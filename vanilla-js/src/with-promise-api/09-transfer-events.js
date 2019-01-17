@@ -8,7 +8,7 @@ import testKeyring from '@polkadot/keyring/testing';
 // utility function for random values
 import { randomAsU8a } from '@polkadot/util-crypto';
 
-// https://polkadot.js.org/api/examples/promise/08-transfer-events/
+// https://polkadot.js.org/api/examples/promise/09-transfer-events/
 export default (provider) => {
   const wrapper = createWrapper('transfer-events', 'Promise - Transfer Events');
   const makeTransfer = async (provider) => {

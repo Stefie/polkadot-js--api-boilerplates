@@ -7,6 +7,7 @@ import {
   BOB, createButton, createLog, createWrapper
 } from '../commons';
 
+// https://polkadot.js.org/api/examples/rx/06_make_transfer/
 export default (provider) => {
   const wrapper = createWrapper('make-transfer', 'Rx - Make Transfer');
   const makeTransfer = async provider => {

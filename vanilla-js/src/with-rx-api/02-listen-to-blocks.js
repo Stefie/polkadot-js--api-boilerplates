@@ -3,6 +3,7 @@ import {
   createButton, createLog, createWrapper
 } from '../commons';
 
+// https://polkadot.js.org/api/examples/rx/02_listen_to_blocks/
 export default (provider) => {
   const wrapper = createWrapper('listen-to-blocks', 'Rx - Listen to Blocks');
   // Create our API with a connection to the node

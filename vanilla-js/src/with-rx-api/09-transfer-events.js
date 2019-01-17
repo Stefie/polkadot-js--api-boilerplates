@@ -9,16 +9,16 @@ import testKeyring from '@polkadot/keyring/testing';
 // utility function for random values
 import { randomAsU8a } from '@polkadot/util-crypto';
 
-// Get a random amount between 1 and 100000
-const randomAmount = Math.floor((Math.random() * 100000) + 1);
-
-// https://polkadot.js.org/api/examples/promise/08-transfer-events/
+// https://polkadot.js.org/api/examples/rx/09-transfer-events/
 export default async (provider) => {
   const wrapper = createWrapper('transfer-events', 'Rx - Transfer Events');
+
   const makeTransfer = async provider => {
-    // // Create our API with a connection to the node
+    // Create our API with a connection to the node
     const api = await ApiRx.create(provider).toPromise();
 
+    // Get a random amount between 1 and 100000
+    const randomAmount = Math.floor((Math.random() * 100000) + 1);
     // create an instance of our testign keyring
     const keyring = testKeyring();
     // find the actual keypair in the keyring

@@ -27,7 +27,7 @@ export default async (provider) => {
         return;
       }
       previous = balance;
-      createLog(`New transaction: ${change}`, wrapper);
+      createLog(`New transaction of: ${change}`, wrapper);
     });
   } catch (e) {
     createError(e, wrapper);

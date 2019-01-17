@@ -3,6 +3,7 @@ import {
   createLog, createWrapper
 } from '../commons';
 
+// https://polkadot.js.org/api/examples/rx/08_system_events/
 export default (provider) => {
   const wrapper = createWrapper('display-system-events', 'Rx - Display System Events');
   // Instanciate API
