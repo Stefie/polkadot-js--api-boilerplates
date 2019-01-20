@@ -1,4 +1,3 @@
-import { switchMap, first } from 'rxjs/operators';
 import { ApiRx } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
@@ -22,19 +21,17 @@ export default (provider) => {
     // Get a random number between 1 and 100000
     const randomAmount = Math.floor((Math.random() * 100000) + 1);
 
-    // retrieve nonce for the account
-    api.query.system.accountNonce(alice.address()).pipe(first(),
-      // pipe nonce into transfer
-      switchMap(nonce => api.tx.balances
-        // create transfer
-        .transfer(BOB, randomAmount)
-        // Sign and send the transcation
-        .signAndSend(alice)))
+    api.tx.balances
+      // create transfer
+      .transfer(BOB, randomAmount)
+      // Sign and send the transcation
+      .signAndSend(alice)
+      // Subscribe to the status updates of the transfer
       .subscribe(({ status, type }) => {
         if (type === 'Finalised') {
-          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.value.toHex()}`, wrapper);
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalised.toHex()}`, wrapper);
         } else {
-          createLog(`Pending transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b>`, wrapper);
+          createLog(`Staus of transfer: ${type}`, wrapper);
         }
       });
   };

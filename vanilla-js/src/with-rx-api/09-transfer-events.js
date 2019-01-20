@@ -1,5 +1,4 @@
 import { ApiRx } from '@polkadot/api';
-import { switchMap, first } from 'rxjs/operators';
 
 import {
   ALICE, createButton, createLog, createWrapper
@@ -27,24 +26,22 @@ export default async (provider) => {
     const recipient = keyring.addFromSeed(randomAsU8a(32)).address();
 
     // get the nonce for the admin key
-    api.query.system.accountNonce(ALICE).pipe(first(),
-      // pipe nonce into transfer
-      switchMap(aliceNonce => api.tx.balances
-        // create transfer
-        .transfer(recipient, randomAmount)
-        // sign the transcation
-        .sign(alicePair, aliceNonce)
-        // send the transaction
-        .send()))
-      // subscribe to overall result
+    //  Create a extrinsic, transferring 12345 units to Bob.
+    api.tx.balances
+    // Do the transfer
+      .transfer(recipient, randomAmount)
+    // Sign and send it
+      .signAndSend(alicePair)
+    // And subscribe to the actual status
       .subscribe(({ events = [], status, type }) => {
         // Log transfer events
-        createLog(`Transaction status: ${type}`, wrapper);
+        createLog(`Transfer status: ${type}`, wrapper);
         if (type === 'Ready') {
-          createLog(`Sending ${randomAmount} from ${alicePair.address()} to ${recipient}`, wrapper);
+          createLog(`Transfer of ${randomAmount} to ${recipient} is ready to be processed`, wrapper);
         }
+        // Log system events once the transfer is finalised
         if (type === 'Finalised') {
-          createLog(`Completed at block hash: ${status.value.toHex()}`, wrapper);
+          createLog(`Completed at block hash: ${status.asFinalised.toHex()}`, wrapper);
           createLog(`Events:`, wrapper, 'highlight');
           events.forEach(({ phase, event: { data, method, section } }) => {
             createLog(`${phase.toString()}: ${section}.${method} ${data.toString()}`, wrapper);
