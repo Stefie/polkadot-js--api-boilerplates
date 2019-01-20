@@ -1,4 +1,5 @@
 import { first } from 'rxjs/operators';
+import { zip } from 'rxjs';
 import { ApiRx } from '@polkadot/api';
 import {
   ALICE, createLog, createWrapper
@@ -9,29 +10,32 @@ export default (provider) => {
   const wrapper = createWrapper('read-storage', 'Rx - Read Chain State');
 
   ApiRx.create(provider).subscribe(async (api) => {
-    // Use toPromise() with async/await to emit the last Observable value as a Promise
-    const [accountNonce, blockPeriod, validators] = await Promise.all([
-      api.query.system.accountNonce(ALICE).pipe(first()).toPromise(),
-      api.query.timestamp.blockPeriod().pipe(first()).toPromise(),
-      api.query.session.validators().pipe(first()).toPromise()
-    ]);
+    // We're using RxJs 'zip()' combination operator together with first()
+    // to get the first emitted values of multiple observables as an array
+    zip(
+      api.query.system.accountNonce(ALICE).pipe(first()),
+      api.query.timestamp.blockPeriod().pipe(first()),
+      api.query.session.validators().pipe(first())
+    )
+    // Then we're subscribing to the emitted results
+      .subscribe(([accountNonce, blockPeriod, validators]) => {
+        createLog(`Account Alice: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
+        createLog(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
 
-    createLog(`Account Alice: ${ALICE} <br />AccountNonce: ${accountNonce}`, wrapper);
-    createLog(`blockPeriod ${blockPeriod.toNumber()} seconds`, wrapper);
+        // If the node has active validators
+        if (validators && validators.length > 0) {
+          createLog('Validators', wrapper, 'highlight');
 
-    if (validators && validators.length > 0) {
-      createLog('Validators', wrapper, 'highlight');
-      // Retrieve the balances for all validators. We're using RxJs' first() method
-      // in combination with toPromise() to only get the first value of the observable
-      // and then unsubscribe austomatically after we received it.
-      const validatorBalances = await Promise.all(
-        validators.map(authorityId => api.query.balances.freeBalance(authorityId)
-          .pipe(first())
-          .toPromise())
-      );
-      validators.forEach((authorityId, index) => {
-        createLog(`Validator: ${authorityId.toString()} <br />Balance: ${validatorBalances[index].toString()}`, wrapper);
+          // We're getting the the balances of all validators, again using 'zip()'
+          validators.map(authorityId => zip(
+            api.query.balances.freeBalance(authorityId).pipe(first())
+          ).subscribe(validatorBalances => {
+            // And lastly log each validators ID and their balance
+            validators.forEach((authorityId, index) => {
+              createLog(`Validator: ${authorityId.toString()} <br />Balance: ${validatorBalances[index].toString()}`, wrapper);
+            });
+          }));
+        }
       });
-    }
   });
 };
