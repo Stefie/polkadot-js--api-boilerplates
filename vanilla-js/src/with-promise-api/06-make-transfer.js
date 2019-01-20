@@ -27,9 +27,9 @@ export default (provider) => {
       // Sign and Send the transaction
       transfer.signAndSend(alice, ({ status, type }) => {
         if (type === 'Finalised') {
-          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.value.toHex()}`, wrapper);
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalised.toHex()}`, wrapper);
         } else {
-          createLog(`Pending transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b>`, wrapper);
+          createLog(`Status of transfer: ${type}`, wrapper);
         }
       });
     } catch (e) {

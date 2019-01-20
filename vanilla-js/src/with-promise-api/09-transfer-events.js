@@ -34,7 +34,7 @@ export default (provider) => {
           // Log transfer events
           createLog(`Transaction status: ${type}`, wrapper);
           if (type === 'Finalised') {
-            createLog(`Completed at block hash: ${status.value.toHex()}`, wrapper);
+            createLog(`Completed at block hash: ${status.asFinalised.toHex()}`, wrapper);
             createLog(`Events:`, wrapper, 'highlight');
             events.forEach(({ phase, event: { data, method, section } }) => {
               createLog(`${phase.toString()}: ${section}.${method} ${data.toString()}`, wrapper);
