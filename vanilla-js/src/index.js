@@ -1,5 +1,13 @@
 import { WsProvider } from '@polkadot/rpc-provider';
-
+import {
+// simpleConnect,
+// listenToBlocks,
+// readStorage
+// makeTransfer,
+// listenToBalanceChange,
+// displaySystemEvents,
+// transferEvents
+} from './with-promise-api';
 import {
   simpleConnect,
   listenToBlocks,
@@ -8,15 +16,6 @@ import {
   listenToBalanceChange,
   displaySystemEvents,
   transferEvents
-} from './with-promise-api';
-import {
-// simpleConnect,
-// listenToBlocks,
-// readStorage,
-// makeTransfer,
-// listenToBalanceChange,
-// displaySystemEvents,
-// transferEvents
 } from './with-rx-api';
 
 // Choose which provider you want to connect to:
