@@ -1,5 +1,5 @@
 import { ApiRx } from '@polkadot/api';
-import { first } from 'rxjs/operators';
+import { pairwise, startWith } from 'rxjs/operators';
 import {
   ALICE, createLog, createWrapper
 } from '../commons';
@@ -9,23 +9,28 @@ export default async (provider) => {
   const wrapper = createWrapper('listen-to-balance-change', 'Rx - Listen to Alice Balance Change');
 
   const api = await ApiRx.create(provider).toPromise();
-  // Retrieve the initial balance. Since the call has no callback, we can use the toPromise()
-  // method on the observable together with the first() operator.
-  let previous = await api.query.balances.freeBalance(ALICE).pipe(first()).toPromise();
 
-  createLog(`<b>Alice</b> ${ALICE} has a balance of ${previous}`, wrapper);
-  createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
-
-  // Here we subscribe to any balance changes and update the on-screen value
-  api.query.balances.freeBalance(ALICE).subscribe((balance) => {
-    // Calculate the delta
-    const change = balance.sub(previous);
-    // Only display positive value changes (Since we are pulling `previous` above already,
-    // the initial balance change will also be zero)
-    if (change.isZero()) {
-      return;
-    }
-    previous = balance;
-    createLog(`New transaction of: ${change}`, wrapper);
-  });
+  // Here we subscribe to any balance changes and update the on-screen value.
+  // We're using RxJs pairwise() operator to get the previous and current values as an array.
+  api.query.balances.freeBalance(ALICE)
+    .pipe(
+      // since pairwise only starts emitting values on the second emission, we prepend an
+      // initial value with the startWith() operator to be able to also receive the first value
+      startWith('first'),
+      pairwise()
+    )
+    .subscribe((balance) => {
+      if (balance[0] === 'first') {
+        // Now we know that if the previous value emitted as balance[0] is `first`,
+        // then balance[1] is the initial value of Alice account.
+        createLog(`<b>Alice</b> ${ALICE} has a balance of ${balance[1]}`, wrapper);
+        createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
+        return;
+      }
+      const change = balance[1].sub(balance[0]);
+      // Only display value changes
+      if (!change.isZero()) {
+        createLog(`New balance change of: ${change}`, wrapper);
+      }
+    });
 };

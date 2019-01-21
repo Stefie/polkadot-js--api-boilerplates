@@ -1,4 +1,5 @@
 import { ApiRx } from '@polkadot/api';
+import { switchMap } from 'rxjs/operators';
 import {
   createLog, createWrapper
 } from '../commons';
@@ -7,9 +8,14 @@ import {
 export default (provider) => {
   const wrapper = createWrapper('display-system-events', 'Rx - Display System Events');
   // Instanciate API
-  ApiRx.create(provider).subscribe((api) => {
-  // subscribe to system events via storage
-    api.query.system.events().subscribe((events) => {
+  ApiRx.create(provider)
+    .pipe(
+      switchMap((api) =>
+        // subscribe to system events via storage
+        api.query.system.events()
+      ))
+  // Then we're subscribing to the emitted results
+    .subscribe((events) => {
       createLog(`----- Received ${events.length} event(s): -----`, wrapper, 'highlight');
       // loop through the Vec<EventRecord>
       events.forEach((record) => {
@@ -26,5 +32,4 @@ export default (provider) => {
       });
       createLog(`----- End ${events.length} event(s): -----------`, wrapper, 'console');
     });
-  });
 };
