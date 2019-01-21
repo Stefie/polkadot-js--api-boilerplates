@@ -23,11 +23,10 @@ export default async (provider) => {
       const change = balance.sub(previous);
       // Only display positive value changes (Since we are pulling `previous` above already,
       // the initial balance change will also be zero)
-      if (change.isZero()) {
-        return;
+      if (!change.isZero()) {
+        previous = balance;
+        createLog(`New transaction of: ${change}`, wrapper);
       }
-      previous = balance;
-      createLog(`New transaction of: ${change}`, wrapper);
     });
   } catch (e) {
     createError(e, wrapper);
