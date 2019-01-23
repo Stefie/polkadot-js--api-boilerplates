@@ -1,0 +1,6 @@
+{
+  "name": "polkadot-js-boilerplates",
+  "devDependencies": {
+    "lerna": "^3.6.0"
+  }
+}
