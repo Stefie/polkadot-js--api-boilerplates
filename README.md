@@ -11,7 +11,7 @@ If you want to know more about the Substrate Framework, please visit the [Develo
 
 - run `git clone https://github.com/Stefie/polkadot-js--api-demos/master` in the terminal OR [Download a ZIP](https://github.com/Stefie/polkadot-js--api-demos/archive/master.zip)
 
-- run `cd polkadot-js--api-demos/demo-vanilla-js` in terminal
+- run `cd polkadot-js--api-demos/packages/vanilla-js` in terminal
 
 - run `yarn install`
 
