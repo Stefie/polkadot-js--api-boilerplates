@@ -29,8 +29,7 @@ export default (provider) => {
       // Create a extrinsic, transferring randomAmount units to randomAccount.
       api.tx.balances
         .transfer(recipient, randomAmount)
-        .sign(alicePair, aliceNonce)
-        .send(({ events = [], status, type }) => {
+        .signAndSend(alicePair, ({ events = [], status, type }) => {
           // Log transfer events
           createLog(`Transaction status: ${type}`, wrapper);
           if (type === 'Finalised') {

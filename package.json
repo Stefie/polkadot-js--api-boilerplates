@@ -1,5 +1,11 @@
 {
   "name": "polkadot-js-boilerplates",
+  "scripts": {
+    "install": "lerna bootstrap",
+    "clean": "lerna clean",
+    "vanilla": "cd packages/vanilla-js && yarn run start",
+    "start": "yarn run vanilla"
+  },
   "devDependencies": {
     "lerna": "^3.6.0"
   }
