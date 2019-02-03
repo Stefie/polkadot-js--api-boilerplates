@@ -1,7 +1,7 @@
 {
-  "name": "demo-vanilla",
+  "name": "demo-vanilla-promise",
   "version": "1.0.0",
-  "description": "A very simple demo of how to use the Polkadot{js} API",
+  "description": "A very simple demo of how to use the Polkadot{js} Promise API",
   "engines": {
     "node": "^10.13.0",
     "yarn": "^1.10.1"

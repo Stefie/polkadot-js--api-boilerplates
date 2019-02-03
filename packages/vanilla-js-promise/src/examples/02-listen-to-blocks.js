@@ -9,6 +9,7 @@ export default async (provider) => {
   try {
     // Create our API with a connection to the node
     const api = await ApiPromise.create(provider);
+    window.api = api;
     // Subscribe to the new headers on-chain. The callback is fired when new headers
     // are found, the call itself returns a promise with a subscription that can be
     // used to unsubscribe from the newHead subscription

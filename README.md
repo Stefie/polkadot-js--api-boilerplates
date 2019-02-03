@@ -15,6 +15,6 @@ If you want to know more about the Substrate Framework, please visit the [Develo
 
 - run `yarn install`
 
-- run `yarn start`, which should open a new browser window on [http://localhost:9000](http://localhost:9000)
+- run `yarn start`, which should open a new browser window on [http://localhost:4000](http://localhost:4000)
 
 Now you can start editing the examples in the [./src/with-promise-api/](https://github.com/Stefie/polkadot-js--api-demos/blob/master/demo-vanilla-js/src/with-promise-api) or [./src/with-rx-api/](https://github.com/Stefie/polkadot-js--api-demos/blob/master/demo-vanilla-js/src/with-rx-api) folders. It has Hot Module Replacement enabled so the browser window should automatically reload when you edit and save a file.

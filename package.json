@@ -3,8 +3,9 @@
   "scripts": {
     "install": "lerna bootstrap",
     "clean": "lerna clean",
-    "vanilla": "cd packages/vanilla-js && yarn run start",
-    "start": "yarn run vanilla"
+    "vanilla-promise": "cd packages/vanilla-js-promise && yarn run start",
+    "vanilla-rx": "cd packages/vanilla-js-rx && yarn run start",
+    "react": "cd packages/react-redux && yarn run start"
   },
   "devDependencies": {
     "lerna": "^3.6.0"
