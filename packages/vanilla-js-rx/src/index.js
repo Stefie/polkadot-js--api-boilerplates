@@ -20,7 +20,7 @@ const provider = new WsProvider('ws://127.0.0.1:9944');
 **/
 // const provider = new WsProvider('wss://substrate-rpc.parity.io/');
 
-(async function main () {
+(function main () {
   // Include the examples
   simpleConnect(provider);
   listenToBlocks(provider);
