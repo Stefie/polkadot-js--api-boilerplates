@@ -36,7 +36,7 @@ export const createButton = (cb, element = app, text = 'Click me') => {
 };
 
 export const createError = (error, element = app) => {
-  const textNode = error.type === undefined ? 'Undefined error while tying to fulfill request' : `Error of type ${error.name}:<br />${error.message}`;
+  const textNode = error.type === undefined ? `Undefined error while tying to fulfill request: ${error}` : `Error of type ${error.name}:<br />${error.message}`;
   console.error(textNode.replace('<br />', '\n'));
   const p = document.createElement('p');
   p.classList.add('error');
