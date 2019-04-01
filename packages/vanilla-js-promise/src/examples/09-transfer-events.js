@@ -29,11 +29,11 @@ export default (provider) => {
       // Create a extrinsic, transferring randomAmount units to randomAccount.
       api.tx.balances
         .transfer(recipient, randomAmount)
-        .signAndSend(alicePair, ({ events = [], status, type }) => {
+        .signAndSend(alicePair, (status) => {
           // Log transfer events
-          createLog(`Transaction status: ${type}`, wrapper);
-          if (type === 'Finalised') {
-            createLog(`Completed at block hash: ${status.asFinalised.toHex()}`, wrapper);
+          createLog(`Transaction status: ${status.type}`, wrapper);
+          if (status.type === 'Finalized') {
+            createLog(`Completed at block hash: ${status.asFinalized.toHex()}`, wrapper);
             createLog(`Events:`, wrapper, 'highlight');
             events.forEach(({ phase, event: { data, method, section } }) => {
               createLog(`${phase.toString()}: ${section}.${method} ${data.toString()}`, wrapper);

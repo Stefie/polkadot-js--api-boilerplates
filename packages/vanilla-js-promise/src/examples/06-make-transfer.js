@@ -16,7 +16,7 @@ export default (provider) => {
       // Get a random number between 1 and 100000
       const randomAmount = Math.floor((Math.random() * 100000) + 1);
       // Get Alice seed
-      const ALICE_SEED = 'Alice'.padEnd(32, ' ');
+      const ALICE_SEED = '//Alice'.padEnd(32, ' ');
       // Create an instance of the keyring
       const keyring = new Keyring();
       // Add Alice to our keyring (with the known seed for the account)
@@ -25,11 +25,11 @@ export default (provider) => {
       // We can also create sign and send in two operations.
       const transfer = api.tx.balances.transfer(BOB, randomAmount);
       // Sign and Send the transaction
-      transfer.signAndSend(alice, ({ status, type }) => {
-        if (type === 'Finalised') {
-          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalised.toHex()}`, wrapper);
+      transfer.signAndSend(alice, ({ status }) => {
+        if (status.type === 'Finalized') {
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalized.toHex()}`, wrapper);
         } else {
-          createLog(`Status of transfer: ${type}`, wrapper);
+          createLog(`Status of transfer: ${status.type}`, wrapper);
         }
       });
     } catch (e) {

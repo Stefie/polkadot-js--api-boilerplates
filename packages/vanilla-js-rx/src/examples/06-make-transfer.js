@@ -27,11 +27,11 @@ export default (provider) => {
       // Sign and send the transcation
       .signAndSend(alice)
       // Subscribe to the status updates of the transfer
-      .subscribe(({ status, type }) => {
-        if (type === 'Finalised') {
-          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalised.toHex()}`, wrapper);
+      .subscribe(({ status }) => {
+        if (status.type === 'Finalized') {
+          createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalized.toHex()}`, wrapper);
         } else {
-          createLog(`Staus of transfer: ${type}`, wrapper);
+          createLog(`Staus of transfer: ${status.type}`, wrapper);
         }
       });
   };

@@ -33,15 +33,15 @@ export default async (provider) => {
     // Sign and send it
       .signAndSend(alicePair)
     // And subscribe to the actual status
-      .subscribe(({ events = [], status, type }) => {
+      .subscribe(({ events = [], status }) => {
         // Log transfer events
-        createLog(`Transfer status: ${type}`, wrapper);
-        if (type === 'Ready') {
+        createLog(`Transfer status: ${status.type}`, wrapper);
+        if (status.type === 'Ready') {
           createLog(`Transfer of ${randomAmount} to ${recipient} is ready to be processed`, wrapper);
         }
-        // Log system events once the transfer is finalised
-        if (type === 'Finalised') {
-          createLog(`Completed at block hash: ${status.asFinalised.toHex()}`, wrapper);
+        // Log system events once the transfer is Finalized
+        if (status.type === 'Finalized') {
+          createLog(`Completed at block hash: ${status.asFinalized.toHex()}`, wrapper);
           createLog(`Events:`, wrapper, 'highlight');
           events.forEach(({ phase, event: { data, method, section } }) => {
             createLog(`${phase.toString()}: ${section}.${method} ${data.toString()}`, wrapper);
