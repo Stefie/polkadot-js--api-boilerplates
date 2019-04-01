@@ -1,9 +1,8 @@
 import { ApiPromise } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
-import { stringToU8a } from '@polkadot/util';
 
 import {
-  BOB, createButton, createLog, createError, createWrapper
+  ALICE, createButton, createLog, createError, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/promise/06_make_transfer/
@@ -15,17 +14,17 @@ export default (provider) => {
       const api = await ApiPromise.create(provider);
       // Get a random number between 1 and 100000
       const randomAmount = Math.floor((Math.random() * 100000) + 1);
-      // Get Alice seed
-      const ALICE_SEED = '//Alice'.padEnd(32, ' ');
+
       // Create an instance of the keyring
-      const keyring = new Keyring();
-      // Add Alice to our keyring (with the known seed for the account)
-      const alice = keyring.addFromSeed(stringToU8a(ALICE_SEED));
+      const keyring = new Keyring({ type: 'sr25519' });
+
+      // Add Bob to keyring
+      const bob = keyring.addFromUri('//Bob');
       // Create a extrinsic, transferring randomAmount units to Bob.
       // We can also create sign and send in two operations.
-      const transfer = api.tx.balances.transfer(BOB, randomAmount);
+      const transfer = api.tx.balances.transfer(ALICE, randomAmount);
       // Sign and Send the transaction
-      transfer.signAndSend(alice, ({ status }) => {
+      transfer.signAndSend(bob, ({ status }) => {
         if (status.type === 'Finalized') {
           createLog(`Successful transfer of ${randomAmount} from <b>Alice</b> to <b>Bob</b> with hash ${status.asFinalized.toHex()}`, wrapper);
         } else {

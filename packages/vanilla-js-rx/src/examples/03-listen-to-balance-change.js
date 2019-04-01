@@ -1,7 +1,7 @@
 import { ApiRx } from '@polkadot/api';
 import { pairwise, startWith } from 'rxjs/operators';
 import {
-  ALICE, createLog, createWrapper
+  BOB, createLog, createWrapper
 } from '../commons';
 
 // https://polkadot.js.org/api/examples/rx/03_listen_to_balance_change/
@@ -12,7 +12,7 @@ export default async (provider) => {
 
   // Here we subscribe to any balance changes and update the on-screen value.
   // We're using RxJs pairwise() operator to get the previous and current values as an array.
-  api.query.balances.freeBalance(ALICE)
+  api.query.balances.freeBalance(BOB)
     .pipe(
       // since pairwise only starts emitting values on the second emission, we prepend an
       // initial value with the startWith() operator to be able to also receive the first value
@@ -23,8 +23,8 @@ export default async (provider) => {
       if (balance[0] === 'first') {
         // Now we know that if the previous value emitted as balance[0] is `first`,
         // then balance[1] is the initial value of Alice account.
-        createLog(`<b>Alice</b> ${ALICE} has a balance of ${balance[1]}`, wrapper);
-        createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Alice address', wrapper);
+        createLog(`<b>Bob</b> ${BOB} has a balance of ${balance[1]}`, wrapper);
+        createLog('You may leave this example running and start the "Make a transfer" example or transfer any value to Bobs address', wrapper);
         return;
       }
       const change = balance[1].sub(balance[0]);

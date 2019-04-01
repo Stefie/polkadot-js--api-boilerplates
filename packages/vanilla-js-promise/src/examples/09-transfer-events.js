@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 
 import {
-  ALICE, createButton, createLog, createError, createWrapper
+  BOB, createButton, createLog, createError, createWrapper
 } from '../commons';
 // import the test keyring (already has dev keys for Alice, Bob, Charlie, Eve & Ferdie)
 import testKeyring from '@polkadot/keyring/testing';
@@ -19,17 +19,19 @@ export default (provider) => {
       const randomAmount = Math.floor((Math.random() * 100000) + 1);
       // create an instance of our testing keyring
       const keyring = testKeyring();
-      // get the nonce for Alice account
-      const aliceNonce = await api.query.system.accountNonce(ALICE);
+
+      // get the nonce for Bobs account
+      const bobNonce = await api.query.system.accountNonce(BOB);
       // find the actual keypair in the keyring
-      const alicePair = keyring.getPair(ALICE);
+      const bobPair = keyring.getPair(BOB);
       // create a new random recipient
       const recipient = keyring.addFromSeed(randomAsU8a(32)).address();
-      createLog(`Sending ${randomAmount} from ${alicePair.address()} to ${recipient} with nonce ${aliceNonce.toString()}`, wrapper);
+      createLog(`Sending ${randomAmount} from ${bobPair.address()} to ${recipient} with nonce ${bobNonce.toString()}`, wrapper);
       // Create a extrinsic, transferring randomAmount units to randomAccount.
       api.tx.balances
         .transfer(recipient, randomAmount)
-        .signAndSend(alicePair, (status) => {
+        .signAndSend(bobPair, ({ events = [], status }) => {
+          console.log('status', status);
           // Log transfer events
           createLog(`Transaction status: ${status.type}`, wrapper);
           if (status.type === 'Finalized') {

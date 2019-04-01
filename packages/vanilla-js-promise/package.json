@@ -24,7 +24,7 @@
     "@polkadot/keyring": "^0.75.1",
     "@polkadot/rpc-provider": "^0.75.1",
     "@polkadot/util": "^0.75.1",
-    "eslint": "^5.15.3",
+    "eslint": "^5.16.0",
     "eslint-config-semistandard": "^13.0.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",

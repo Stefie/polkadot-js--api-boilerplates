@@ -1,7 +1,7 @@
 import { ApiRx } from '@polkadot/api';
 
 import {
-  ALICE, createButton, createLog, createWrapper
+  BOB, createButton, createLog, createWrapper
 } from '../commons';
 // import the test keyring (already has dev keys for Alice, Bob, Charlie, Eve & Ferdie)
 import testKeyring from '@polkadot/keyring/testing';
@@ -18,20 +18,20 @@ export default async (provider) => {
 
     // Get a random amount between 1 and 100000
     const randomAmount = Math.floor((Math.random() * 100000) + 1);
-    // create an instance of our testign keyring
+
+    // create an instance of our testing keyring
     const keyring = testKeyring();
     // find the actual keypair in the keyring
-    const alicePair = keyring.getPair(ALICE);
+    const bobPair = keyring.getPair(BOB);
     // create a new random recipient
     const recipient = keyring.addFromSeed(randomAsU8a(32)).address();
 
-    // get the nonce for the admin key
-    //  Create a extrinsic, transferring 12345 units to Bob.
+    // Create a extrinsic, transferring randomAmount units to randomAccount.
     api.tx.balances
     // Do the transfer
       .transfer(recipient, randomAmount)
     // Sign and send it
-      .signAndSend(alicePair)
+      .signAndSend(bobPair)
     // And subscribe to the actual status
       .subscribe(({ events = [], status }) => {
         // Log transfer events
