@@ -22,14 +22,16 @@ const provider = new WsProvider('ws://127.0.0.1:9944');
 
 (async function main () {
   // Include the examples
-  simpleConnect(provider);
-  listenToBlocks(provider);
-  readStorage(provider);
-  makeTransfer(provider);
-  listenToBalanceChange(provider);
+
+  // simpleConnect(provider);
+  // listenToBlocks(provider);
+  // readStorage(provider);
+  // makeTransfer(provider);
+  // listenToBalanceChange(provider);
   displaySystemEvents(provider);
-  transferEvents(provider);
+  // transferEvents(provider);
 
   // Add the api to the window object to make it accessible in the browsers dev tools
-  window.api = await ApiPromise.create(provider);
+  window.api = await new ApiPromise();
+  console.log(window.api);
 }());

@@ -8,10 +8,6 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",
-    "@polkadot/api": "^0.45.18",
-    "@polkadot/keyring": "^0.34.35",
-    "@polkadot/rpc-provider": "^0.45.18",
-    "@polkadot/util": "^0.34.35",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
     "eslint-config-react-app": "^3.0.6",

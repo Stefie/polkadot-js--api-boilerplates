@@ -13,6 +13,7 @@ export default async (provider) => {
     // subscribe to system events via storage
     api.query.system.events((events) => {
       createLog(`----- Received ${events.length} event(s): -----`, wrapper, 'highlight');
+      console.log('EVENTS', events);
       // loop through the Vec<EventRecord>
       events.forEach((record) => {
       // extract the phase, event and the event types
